@@ -1,69 +1,119 @@
-# React + TypeScript + Vite
+# Vehicle Service Platform - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Фронтенд приложение для системы управления пользователями и транспортными средствами.
 
-Currently, two official plugins are available:
+## Технологии
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19** - Основная библиотека для UI
+- **TypeScript** - Типизация
+- **Material-UI (MUI)** - UI компоненты
+- **React Router** - Роутинг
+- **React Hook Form** - Управление формами
+- **Zod** - Валидация данных
+- **Axios** - HTTP клиент
+- **Vite** - Сборщик
 
-## Expanding the ESLint configuration
+## Структура проекта
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── api/                 # API клиенты
+│   ├── client.ts       # Базовый HTTP клиент
+│   ├── userService.ts  # API для пользователей
+│   └── vehicleService.ts # API для транспортных средств
+├── components/          # Переиспользуемые компоненты
+│   ├── Navigation.tsx  # Навигация
+│   ├── UserForm.tsx    # Форма пользователя
+│   └── VehicleForm.tsx # Форма транспортного средства
+├── pages/              # Страницы приложения
+│   ├── HomePage.tsx    # Главная страница
+│   ├── UsersPage.tsx   # Страница пользователей
+│   └── VehiclesPage.tsx # Страница транспортных средств
+├── types/              # TypeScript типы
+│   └── index.ts        # Интерфейсы данных
+├── App.tsx             # Главный компонент
+└── main.tsx           # Точка входа
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Функциональность
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Главная страница
+- Обзор статистики системы
+- Отображение связанных данных (пользователи и их ТС)
+- Быстрый доступ к основным разделам
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Управление пользователями
+- Список всех пользователей
+- Создание нового пользователя
+- Редактирование существующего пользователя
+- Удаление пользователя
+- Валидация форм
+
+### Управление транспортными средствами
+- Список всех транспортных средств
+- Создание нового ТС с привязкой к пользователю
+- Редактирование ТС
+- Удаление ТС
+- Отображение связанного пользователя
+
+## Установка и запуск
+
+1. Установите зависимости:
+```bash
+npm install
 ```
+
+2. Запустите сервер разработки:
+```bash
+npm run dev
+```
+
+3. Откройте браузер по адресу: http://localhost:5173
+
+## Настройка API
+
+Фронтенд настроен для работы с микросервисами:
+- User Service: http://localhost:3001
+- Vehicle Service: http://localhost:3002
+
+Настройки можно изменить в файле `src/api/client.ts`.
+
+## Особенности реализации
+
+### Валидация форм
+- Используется Zod для схем валидации
+- React Hook Form для управления состоянием форм
+- Валидация на стороне клиента
+
+### Обработка ошибок
+- Централизованная обработка ошибок API
+- Пользовательские уведомления об ошибках
+- Логирование ошибок в консоль
+
+### UI/UX
+- Современный дизайн с Material-UI
+- Адаптивная верстка
+- Интуитивная навигация
+- Индикаторы загрузки
+
+### Типизация
+- Полная типизация TypeScript
+- Интерфейсы для всех данных
+- Типизированные API вызовы
+
+## Разработка
+
+### Добавление новых страниц
+1. Создайте компонент в `src/pages/`
+2. Добавьте маршрут в `src/App.tsx`
+3. Добавьте ссылку в навигацию
+
+### Добавление новых API
+1. Создайте сервис в `src/api/`
+2. Добавьте типы в `src/types/index.ts`
+3. Используйте в компонентах
+
+### Стилизация
+- Используйте Material-UI компоненты
+- Применяйте `sx` проп для кастомных стилей
+- Следуйте дизайн-системе MUI

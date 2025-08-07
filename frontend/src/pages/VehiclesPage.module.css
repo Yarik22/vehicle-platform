@@ -1,0 +1,177 @@
+.container {
+  margin-top: 32px;
+  padding: 0 16px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin-top: 16px;
+    padding: 0 8px;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1976d2;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+.addButton {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 10px 20px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.2);
+  transition: all 0.2s ease;
+}
+
+.addButton:hover {
+  box-shadow: 0 4px 16px rgba(25, 118, 210, 0.3);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .addButton {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+.tableContainer {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.table {
+  min-width: 750px;
+}
+
+.tableHead {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+}
+
+.tableHeadCell {
+  font-weight: 600;
+  color: #333;
+  padding: 16px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.tableBodyCell {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+}
+
+.tableRow:hover .tableBodyCell {
+  background-color: #f8f9fa;
+}
+
+.idCell {
+  font-weight: 600;
+  color: #666;
+  width: 60px;
+}
+
+.makeCell {
+  font-weight: 600;
+  color: #1976d2;
+}
+
+.modelCell {
+  font-weight: 500;
+}
+
+.yearCell {
+  color: #666;
+  text-align: center;
+}
+
+.userCell {
+  color: #666;
+  font-style: italic;
+}
+
+.actionsCell {
+  width: 120px;
+  text-align: center;
+}
+
+.actionButton {
+  margin: 0 4px;
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover {
+  transform: scale(1.1);
+}
+
+.editButton {
+  color: #1976d2;
+}
+
+.deleteButton {
+  color: #d32f2f;
+}
+
+
+
+@media (max-width: 900px) {
+  .table {
+    min-width: auto;
+  }
+  
+  .tableHeadCell,
+  .tableBodyCell {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .idCell {
+    width: 50px;
+  }
+  
+  .actionsCell {
+    width: 100px;
+  }
+}
+
+@media (max-width: 600px) {
+  .tableContainer {
+    overflow-x: auto;
+  }
+  
+  .table {
+    font-size: 12px;
+  }
+  
+  .tableHeadCell,
+  .tableBodyCell {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+} 

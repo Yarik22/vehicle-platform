@@ -1,0 +1,80 @@
+.dialog {
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.10);
+}
+
+.dialogTitle {
+  font-weight: 700;
+  font-size: 22px;
+  text-align: center;
+  padding-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .dialogTitle {
+    font-size: 18px;
+  }
+}
+
+.dialogContent {
+  padding-top: 8px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 16px;
+}
+
+@media (max-width: 600px) {
+  .formContainer {
+    padding: 0 8px;
+  }
+}
+
+.textField {
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.textField input {
+  padding: 12px 16px;
+}
+
+.textField label {
+  padding-left: 8px;
+}
+
+.formControl {
+  border-radius: 8px;
+}
+
+.formControl .MuiOutlinedInput-root {
+  border-radius: 8px;
+}
+
+.dialogActions {
+  justify-content: center;
+  gap: 16px;
+  padding-bottom: 8px;
+}
+
+.cancelButton {
+  min-width: 120px;
+  border-radius: 8px;
+}
+
+.submitButton {
+  min-width: 140px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .cancelButton,
+  .submitButton {
+    min-width: 100px;
+    font-size: 14px;
+  }
+} 

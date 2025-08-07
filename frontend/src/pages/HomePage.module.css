@@ -1,0 +1,189 @@
+.container {
+  margin-top: 32px;
+  padding: 0 16px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin-top: 16px;
+    padding: 0 8px;
+  }
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  background: linear-gradient(45deg, #1976d2, #42a5f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 32px;
+  }
+}
+
+.subtitle {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 600px) {
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+}
+
+.statsGrid {
+  margin-bottom: 48px;
+}
+
+@media (max-width: 600px) {
+  .statsGrid {
+    margin-bottom: 32px;
+  }
+}
+
+.statCard {
+  height: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.statCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.cardContent {
+  padding: 24px;
+}
+
+@media (max-width: 600px) {
+  .cardContent {
+    padding: 16px;
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cardIcon {
+  margin-right: 12px;
+  font-size: 24px;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.statNumber {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 600px) {
+  .statNumber {
+    font-size: 28px;
+  }
+}
+
+.statDescription {
+  font-size: 14px;
+  color: #666;
+}
+
+.cardActions {
+  padding: 0 24px 24px;
+}
+
+@media (max-width: 600px) {
+  .cardActions {
+    padding: 0 16px 16px;
+  }
+}
+
+.sectionTitle {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 600px) {
+  .sectionTitle {
+    font-size: 24px;
+  }
+}
+
+.tableContainer {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.table {
+  min-width: 650px;
+}
+
+.tableHead {
+  background: #f5f5f5;
+}
+
+.tableHeadCell {
+  font-weight: 600;
+  color: #333;
+  padding: 16px;
+}
+
+.tableBodyCell {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.userName {
+  font-weight: 600;
+  color: #1976d2;
+}
+
+.vehicleCount {
+  font-weight: 600;
+  color: #1976d2;
+}
+
+.vehicleList {
+  color: #666;
+  font-size: 14px;
+}
+
+.vehicleItem {
+  margin-bottom: 4px;
+}
+
+.noVehicles {
+  color: #999;
+  font-style: italic;
+}
+
+@media (max-width: 900px) {
+  .table {
+    min-width: auto;
+  }
+  
+  .tableHeadCell,
+  .tableBodyCell {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+} 
