@@ -116,10 +116,10 @@
 ### Как использовать коллекцию и окружение Postman
 
 1. **Скачайте коллекцию с запросами:**  
-   [VehiclePlatform.postman_collection.json](./docs/architecture/VehiclePlatform.postman_collection.json)
+   [VehiclePlatform.postman_collection.json](./docs/tests/VehiclePlatform.postman_collection.json)
 
 2. **Скачайте файл окружения:**  
-   [VehiclePlatform.postman_environment.json](./docs/architecture/VehiclePlatform.postman_environment.json)
+   [VehiclePlatform.postman_environment.json](./docs/tests/VehiclePlatform.postman_environment.json)
 
 3. **Импортируйте файлы в Postman:**
 
