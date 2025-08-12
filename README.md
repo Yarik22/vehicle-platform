@@ -47,7 +47,7 @@
 
 ## Использование контейнеров
 
-![Docker](./docs/architecture/containers.jpg)
+![Docker](./docs/screenshots/containers.jpg)
 
 - **User Service:**
 
