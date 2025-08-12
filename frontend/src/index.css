@@ -1,14 +1,14 @@
-/* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -20,7 +20,6 @@ html, body {
   flex-direction: column;
 }
 
-/* Ensure full width for all containers */
 .container {
   width: 100% !important;
   max-width: none !important;
@@ -28,7 +27,6 @@ html, body {
   margin: 0 !important;
 }
 
-/* Override MUI Container default styles */
 .MuiContainer-root {
   width: 100% !important;
   max-width: none !important;
@@ -42,7 +40,6 @@ html, body {
   }
 }
 
-/* Ensure pages take full width */
 .page-container {
   width: 100%;
   min-height: calc(100vh - 64px);
@@ -55,7 +52,6 @@ html, body {
   }
 }
 
-/* Loading overlay styles */
 .loading-overlay {
   position: fixed;
   top: 0;
@@ -101,7 +97,6 @@ html, body {
   }
 }
 
-/* Mobile navigation styles */
 .mobile-nav-toggle {
   display: none;
   background: none;
@@ -209,7 +204,8 @@ html, body {
   transform: translateY(-24px) scaleY(0.95);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s cubic-bezier(0.4,0,0.2,1), transform 0.2s cubic-bezier(0.4,0,0.2,1);
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (max-width: 600px) {
@@ -253,7 +249,7 @@ html, body {
     justify-content: center;
     align-items: center;
   }
-  
+
   .desktop-nav {
     display: none !important;
   }
@@ -263,13 +259,12 @@ html, body {
   .mobile-nav-toggle {
     display: none !important;
   }
-  
+
   .mobile-nav-menu {
     display: none !important;
   }
 }
 
-/* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -289,13 +284,11 @@ html, body {
   background: #a8a8a8;
 }
 
-/* Focus styles for accessibility */
 *:focus {
   outline: 2px solid #1976d2;
   outline-offset: 2px;
 }
 
-/* Remove focus outline for mouse users */
 *:focus:not(:focus-visible) {
   outline: none;
 }

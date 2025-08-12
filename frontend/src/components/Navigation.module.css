@@ -55,4 +55,38 @@
     font-size: 14px;
     padding: 6px 12px;
   }
-} 
+}
+
+.navButton.loginLogout {
+  background-color: #1565c0;
+  color: #fff;
+  font-weight: 600;
+  border: 2px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.navButton.loginLogout:hover {
+  background-color: #0d47a1;
+  border-color: #fff;
+  color: #e3f2fd;
+}
+
+.mobileNavItem.logoutButton {
+  background-color: #1565c0;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 24px;
+  border: 2px solid transparent;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  text-align: center;
+  display: block;
+  margin: 8px 0;
+}
+
+.mobileNavItem.logoutButton:hover {
+  background-color: #0d47a1;
+  border-color: #fff;
+  color: #e3f2fd;
+}

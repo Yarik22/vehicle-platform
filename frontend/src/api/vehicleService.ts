@@ -1,39 +1,50 @@
-import { vehicleServiceApi } from './client';
-import type { Vehicle, CreateVehicleRequest, UpdateVehicleRequest, ApiResponse } from '../types';
+import { vehicleServiceApi } from "./client";
+import type {
+  Vehicle,
+  CreateVehicleRequest,
+  UpdateVehicleRequest,
+} from "../types";
 
 export const vehicleService = {
-  // Получить все транспортные средства
   getVehicles: async (): Promise<Vehicle[]> => {
-    const response = await vehicleServiceApi.get<ApiResponse<Vehicle[]>>('/vehicles');
-    return response.data.data;
+    const response = await vehicleServiceApi.get<Vehicle[]>("/vehicles");
+    return response.data;
   },
 
-  // Получить транспортное средство по ID
   getVehicleById: async (id: number): Promise<Vehicle> => {
-    const response = await vehicleServiceApi.get<ApiResponse<Vehicle>>(`/vehicles/${id}`);
-    return response.data.data;
+    const response = await vehicleServiceApi.get<Vehicle>(`/vehicles/${id}`);
+    return response.data;
   },
 
-  // Создать транспортное средство
-  createVehicle: async (vehicleData: CreateVehicleRequest): Promise<Vehicle> => {
-    const response = await vehicleServiceApi.post<ApiResponse<Vehicle>>('/vehicles', vehicleData);
-    return response.data.data;
+  createVehicle: async (
+    vehicleData: CreateVehicleRequest
+  ): Promise<Vehicle> => {
+    const response = await vehicleServiceApi.post<Vehicle>(
+      "/vehicles",
+      vehicleData
+    );
+    return response.data;
   },
 
-  // Обновить транспортное средство
-  updateVehicle: async (id: number, vehicleData: UpdateVehicleRequest): Promise<Vehicle> => {
-    const response = await vehicleServiceApi.put<ApiResponse<Vehicle>>(`/vehicles/${id}`, vehicleData);
-    return response.data.data;
+  updateVehicle: async (
+    id: number,
+    vehicleData: UpdateVehicleRequest
+  ): Promise<Vehicle> => {
+    const response = await vehicleServiceApi.put<Vehicle>(
+      `/vehicles/${id}`,
+      vehicleData
+    );
+    return response.data;
   },
 
-  // Удалить транспортное средство
   deleteVehicle: async (id: number): Promise<void> => {
     await vehicleServiceApi.delete(`/vehicles/${id}`);
   },
 
-  // Получить транспортные средства пользователя
   getVehiclesByUserId: async (userId: number): Promise<Vehicle[]> => {
-    const response = await vehicleServiceApi.get<ApiResponse<Vehicle[]>>(`/vehicles?user_id=${userId}`);
-    return response.data.data;
+    const response = await vehicleServiceApi.get<Vehicle[]>(
+      `/vehicles?user_id=${userId}`
+    );
+    return response.data;
   },
-}; 
+};

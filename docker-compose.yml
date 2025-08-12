@@ -1,0 +1,55 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init-db:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "${USER_SERVICE_PORT}:4000"
+    depends_on:
+      - postgres
+      - rabbitmq
+    env_file:
+      - ./.env
+
+  vehicle-service:
+    build: ./vehicle-service
+    ports:
+      - "${VEHICLE_SERVICE_PORT}:5000"
+    depends_on:
+      - postgres
+      - rabbitmq
+    env_file:
+      - ./.env
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - user-service
+      - vehicle-service
+    env_file:
+      - ./.env
+
+volumes:
+  pgdata:
+  rabbitmqdata:

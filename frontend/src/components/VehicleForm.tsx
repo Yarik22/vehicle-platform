@@ -1,7 +1,7 @@
-import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import React, { useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import {
   Dialog,
   DialogTitle,
@@ -14,25 +14,37 @@ import {
   InputLabel,
   Select,
   MenuItem,
-} from '@mui/material';
-import type { Vehicle, CreateVehicleRequest, UpdateVehicleRequest, User } from '../types';
-import styles from './VehicleForm.module.css';
+} from "@mui/material";
+import type {
+  Vehicle,
+  CreateVehicleRequest,
+  UpdateVehicleRequest,
+  User,
+} from "../types";
+import styles from "./VehicleForm.module.css";
 
-// Схема валидации для создания транспортного средства
 const createVehicleSchema = z.object({
-  make: z.string().min(1, 'Марка обязательна'),
-  model: z.string().min(1, 'Модель обязательна'),
-  year: z.number().min(1900, 'Год должен быть не менее 1900').max(new Date().getFullYear() + 1, 'Год не может быть больше текущего').optional(),
-  user_id: z.number().min(1, 'Выберите пользователя'),
+  make: z.string().min(1, "Марка обязательна"),
+  model: z.string().min(1, "Модель обязательна"),
+  year: z
+    .union([z.string(), z.number()])
+    .optional()
+    .transform((val) => {
+      if (!val || val.toString().trim() === "") return undefined;
+      const num = Number(val);
+      if (Number.isNaN(num)) return undefined;
+      return num;
+    })
+    .refine(
+      (val) =>
+        val === undefined ||
+        (val >= 1900 && val <= new Date().getFullYear() + 1),
+      { message: "Год должен быть от 1900 до текущего года +1" }
+    ),
+  user_id: z.number().min(1, "Выберите пользователя"),
 });
 
-// Схема валидации для обновления транспортного средства
-const updateVehicleSchema = z.object({
-  make: z.string().min(1, 'Марка обязательна').optional(),
-  model: z.string().min(1, 'Модель обязательна').optional(),
-  year: z.number().min(1900, 'Год должен быть не менее 1900').max(new Date().getFullYear() + 1, 'Год не может быть больше текущего').optional(),
-  user_id: z.number().min(1, 'Выберите пользователя').optional(),
-});
+const updateVehicleSchema = createVehicleSchema.partial();
 
 type CreateVehicleFormData = z.infer<typeof createVehicleSchema>;
 type UpdateVehicleFormData = z.infer<typeof updateVehicleSchema>;
@@ -64,22 +76,32 @@ const VehicleForm: React.FC<VehicleFormProps> = ({
     formState: { errors },
   } = useForm<CreateVehicleFormData | UpdateVehicleFormData>({
     resolver: zodResolver(schema),
-    defaultValues: vehicle
-      ? {
-          make: vehicle.make,
-          model: vehicle.model,
-          year: vehicle.year || undefined,
-          user_id: vehicle.user_id,
-        }
-      : {
-          make: '',
-          model: '',
-          year: undefined,
-          user_id: 0,
-        },
+    defaultValues: {
+      make: vehicle?.make || "",
+      model: vehicle?.model || "",
+      year:
+        vehicle?.year !== undefined && vehicle?.year !== null
+          ? vehicle.year
+          : 0,
+      user_id: vehicle?.user_id || 0,
+    },
   });
 
-  const handleFormSubmit = (data: CreateVehicleFormData | UpdateVehicleFormData) => {
+  useEffect(() => {
+    reset({
+      make: vehicle?.make || "",
+      model: vehicle?.model || "",
+      year:
+        vehicle?.year !== undefined && vehicle?.year !== null
+          ? vehicle.year
+          : 0,
+      user_id: vehicle?.user_id || 0,
+    });
+  }, [vehicle, open, reset]);
+
+  const handleFormSubmit = (
+    data: CreateVehicleFormData | UpdateVehicleFormData
+  ) => {
     onSubmit(data);
     if (!isEditMode) {
       reset();
@@ -92,9 +114,17 @@ const VehicleForm: React.FC<VehicleFormProps> = ({
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth className={styles.dialog}>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      maxWidth="sm"
+      fullWidth
+      className={styles.dialog}
+    >
       <DialogTitle className={styles.dialogTitle}>
-        {isEditMode ? 'Редактировать транспортное средство' : 'Создать транспортное средство'}
+        {isEditMode
+          ? "Редактировать транспортное средство"
+          : "Создать транспортное средство"}
       </DialogTitle>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <DialogContent className={styles.dialogContent}>
@@ -140,8 +170,9 @@ const VehicleForm: React.FC<VehicleFormProps> = ({
                   fullWidth
                   error={!!errors.year}
                   helperText={errors.year?.message}
-                  onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : undefined)}
                   className={styles.textField}
+                  value={field.value || ""}
+                  onChange={(e) => field.onChange(e.target.value)}
                 />
               )}
             />
@@ -149,7 +180,11 @@ const VehicleForm: React.FC<VehicleFormProps> = ({
               name="user_id"
               control={control}
               render={({ field }) => (
-                <FormControl fullWidth error={!!errors.user_id} className={styles.formControl}>
+                <FormControl
+                  fullWidth
+                  error={!!errors.user_id}
+                  className={styles.formControl}
+                >
                   <InputLabel>Пользователь</InputLabel>
                   <Select
                     {...field}
@@ -164,7 +199,9 @@ const VehicleForm: React.FC<VehicleFormProps> = ({
                     ))}
                   </Select>
                   {errors.user_id && (
-                    <Box sx={{ color: 'error.main', fontSize: '0.75rem', mt: 0.5 }}>
+                    <Box
+                      sx={{ color: "error.main", fontSize: "0.75rem", mt: 0.5 }}
+                    >
                       {errors.user_id.message}
                     </Box>
                   )}
@@ -174,11 +211,22 @@ const VehicleForm: React.FC<VehicleFormProps> = ({
           </Box>
         </DialogContent>
         <DialogActions className={styles.dialogActions}>
-          <Button onClick={handleClose} disabled={isLoading} variant="outlined" color="secondary" className={styles.cancelButton}>
+          <Button
+            onClick={handleClose}
+            disabled={isLoading}
+            variant="outlined"
+            color="secondary"
+            className={styles.cancelButton}
+          >
             Отмена
           </Button>
-          <Button type="submit" variant="contained" disabled={isLoading} className={styles.submitButton}>
-            {isLoading ? 'Сохранение...' : isEditMode ? 'Обновить' : 'Создать'}
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={isLoading}
+            className={styles.submitButton}
+          >
+            {isLoading ? "Сохранение..." : isEditMode ? "Обновить" : "Создать"}
           </Button>
         </DialogActions>
       </form>
@@ -186,4 +234,4 @@ const VehicleForm: React.FC<VehicleFormProps> = ({
   );
 };
 
-export default VehicleForm; 
+export default VehicleForm;
